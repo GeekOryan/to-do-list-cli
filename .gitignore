@@ -1,0 +1,8 @@
+tasks.json
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+*.json
+practice.py
+todoo.py

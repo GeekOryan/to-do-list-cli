@@ -119,7 +119,27 @@ def main():
             else:
                 print("Invalid selection")
         elif choice == '4':
-            print("Delete task feature : coming soon")
+            task_indices = []
+            display_number = 1
+            
+            for x in range(len(tasks)):
+                print(f"{display_number}. {tasks[x]['name']} | Due: {tasks[x]['due']} | Priority: {tasks[x]['priority']}")
+                task_indices.append(x)
+                display_number += 1
+                
+            if not task_indices:
+                print("No tasks to delete")
+                continue
+            
+            selected = int(input("Enter task number to delete: "))
+            
+            if 1 <= selected <= len(task_indices):
+                real_index = task_indices[selected - 1]
+                tasks.pop(real_index) # This will completely delete the task
+                save_tasks(tasks)
+                print("Task deleted successfully")
+            else:
+                print("Invalid selection")
         elif choice == '5':
             print("Goodbye!")
             save_tasks(tasks)

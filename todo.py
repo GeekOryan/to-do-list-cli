@@ -95,7 +95,29 @@ def main():
                     print(f"{task_number}. {name_value} | Due: {due_value} | Priority: {priority_value} | Status: {status_value} ")
                     task_number += 1
         elif choice == '3':
-            print("Complete task feature : coming soon")
+            
+            pending_indices = []
+            display_number = 1
+            
+            for x in range(len(tasks)):
+                if tasks[x]["status"] == "pending":
+                    print(f"{display_number}. {tasks[x]['name']} | Due: {tasks[x]['due']} | Priority: {tasks[x]['priority']}")
+                    pending_indices.append(x)
+                    display_number += 1
+                    
+            if not pending_indices:
+                print("No pending tasks")
+                continue
+                
+            selected = int(input("Enter task number to complete: "))
+             
+            if 1 <= selected <= len(pending_indices):
+                real_index = pending_indices[selected - 1]
+                tasks[real_index]["status"] = "complete"
+                save_tasks(tasks)
+                print("Task marked as complete")
+            else:
+                print("Invalid selection")
         elif choice == '4':
             print("Delete task feature : coming soon")
         elif choice == '5':

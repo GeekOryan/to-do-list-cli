@@ -48,7 +48,14 @@ def main():
         if choice == '1':
             task_name = input("Enter task name: ")
             task_due_date = input("Enter due date (YYYY-MM-DD): ")
-            priority_level = input("Enter priority (High/Medium/Low): ")
+            
+            while True:
+                
+                priority_level = input("Enter priority (High/Medium/Low): ").lower()
+                if priority_level in ('high', 'medium', 'low'):
+                    break
+                else:
+                    print("Invalid input. Options available are (High, Medium or Low)")
             
             new_task = {
                 "name": task_name,
@@ -108,8 +115,10 @@ def main():
             if not pending_indices:
                 print("No pending tasks")
                 continue
-                
-            selected = int(input("Enter task number to complete: "))
+            try:  
+                selected = int(input("Enter task number to complete: "))
+            except ValueError:
+                print("Invalid input. Please select a number.")
              
             if 1 <= selected <= len(pending_indices):
                 real_index = pending_indices[selected - 1]
@@ -122,16 +131,20 @@ def main():
             task_indices = []
             display_number = 1
             
-            for x in range(len(tasks)):
-                print(f"{display_number}. {tasks[x]['name']} | Due: {tasks[x]['due']} | Priority: {tasks[x]['priority']}")
-                task_indices.append(x)
-                display_number += 1
-                
             if not task_indices:
                 print("No tasks to delete")
                 continue
+            else:
             
-            selected = int(input("Enter task number to delete: "))
+                for x in range(len(tasks)):
+                    print(f"{display_number}. {tasks[x]['name']} | Due: {tasks[x]['due']} | Priority: {tasks[x]['priority']}")
+                    task_indices.append(x)
+                    display_number += 1
+                
+            try:
+                selected = int(input("Enter task number to delete: "))
+            except ValueError:
+                print("Invalid input. Please select a number.")
             
             if 1 <= selected <= len(task_indices):
                 real_index = task_indices[selected - 1]

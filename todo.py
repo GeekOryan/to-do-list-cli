@@ -131,7 +131,7 @@ def main():
             task_indices = []
             display_number = 1
             
-            if not task_indices:
+            if not tasks:
                 print("No tasks to delete")
                 continue
             else:
